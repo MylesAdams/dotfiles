@@ -120,5 +120,6 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
 
-export EDITOR=emacs
+export EDITOR="emacsclient -t"
 export ALTERNATE_EDITOR=""
+export SUDO_EDITOR="emacsclient"
