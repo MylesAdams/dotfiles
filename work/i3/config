@@ -44,47 +44,46 @@ bindsym $mod+Return exec tilix
 # Kill focused window
 bindsym $mod+Shift+q kill
 
-
 # Other settings
 focus_follows_mouse no
 
 # rofi
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -i -dmenu -font "IBM Plex Sans Medium 15" '
-# Screenshot (now provided by Plasma)
-# bindsym Print exec --no-startup-id spectacle
+# Screenshot
+bindsym Print exec --no-startup-id spectacle
 
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
+#bindsym $mod+Left focus left
 #bindsym $mod+Down focus down
 #bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+#bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+#bindsym $mod+Shift+Left move left
+#bindsym $mod+Shift+Down move down
+#bindsym $mod+Shift+Up move up
+#bindsym $mod+Shift+Right move right
 
 # bindsym $mod+space exec rofi -show run
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+c split h 
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -110,40 +109,47 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # workspace names
-set $workspace1 "1: media"
-set $workspace2 "2: internet"
-set $workspace3 "3: terminals"
-set $workspace4 "4: workspace"
-set $workspace10 "10: email"
+set $workspace1 "1:"
+set $workspace2 "2:"
+set $workspace3 "3:"
+set $workspace4 "4:"
+set $workspace5 "5:5"
+set $workspace6 "6:6"
+set $workspace7 "7:7"
+set $workspace8 "8:8"
+set $workspace9 "9:9"
+set $workspace10 "10:"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
+bindsym $mod+5 workspace $workspace5 
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10
+
+bindsym $mod+grave workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+5 move container to workspace $workspace5 
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # relative workspace moves
 bindsym $mod+z workspace prev
-bindsym $mod+c workspace next
-bindsym $mod+x move workspace to output right
+bindsym $mod+x workspace next
+bindsym $mod+Shift+x move workspace to output right
 
 # Move focus between screens
 bindsym $mod+Alt+h focus output left
@@ -190,8 +196,9 @@ bindsym $mod+r mode "resize"
 
 #i3bar
 bar {
+        strip_workspace_numbers yes
         verbose no
-        position bottom
+        position top
         height 32
         status_command i3blocks
         i3bar_command i3bar -t
@@ -212,6 +219,8 @@ for_window [class="yakuake"] floating enable;
 exec --no-startup-id firefox
 exec --no-startup-id tilix
 exec --no-startup-id tilix
+exec_always compton
+exec redshift
 
 # workspace windows
 #assign [class="discord"] $workspace1
@@ -225,4 +234,6 @@ assign [class="Thunderbird"] $workspace10
 exec_always feh --bg-scale /home/myles/Documents/wallpapers/wallpaper.jpg
 #exec_always ~/.config/polybar/launch.sh
 
-
+# Custom Scripts
+bindsym $mod+Ctrl+l exec fancylock
+bindsym $mod+Ctrl+v workspace $workspace4; exec zathura ~/Documents/Coding/Vim-Cheat-Sheet.pdf

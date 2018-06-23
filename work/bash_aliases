@@ -1,0 +1,38 @@
+workspace() {
+    cd ~/Documents/workspace/$1
+}
+
+# Emacs
+alias emacs='emacsclient -t'
+alias e='emacsclient -t'
+alias se='sudo emacs -nw'
+
+# Programs
+alias r='ranger'
+
+# Directory movement
+alias ws='workspace'
+
+# SSH
+alias droplet='ssh myles@206.189.162.148'
+
+# Git
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
+alias gps='git push'
+alias gpl='git pull'
+
+# Useful changes to commands
+alias cp='cp -r'
+alias diff='colordiff'
+alias mkdir='mkdir -pv'
+
+# Useful new commands
+alias myip='curl http://ifconfig.me/ip'
+alias bashrc='source ~/.bashrc'
+alias ..='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
