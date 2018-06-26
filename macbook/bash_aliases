@@ -1,0 +1,84 @@
+function workspace() {
+    cd ~/Documents/Workspace/$1
+}
+
+function emacs_func() {
+    emacs $1 &
+}
+
+function sudo_emacs_func() {
+    sudo emacs $1 &
+}
+
+function emacsclient_func() {
+    emacsclient -c $1 &
+}
+
+function e_func()
+{
+ echo "emacs function backgrounds and disowns emacs, or calls client if server already running; see .bashrc";
+ local FLUFFY="$@";
+ local SERVERSOCKET=/tmp/emacs${UID}/server ;
+ echo "trying to open: " $FLUFFY 
+ echo " checking: " $SERVERSOCKET "for emacs server " ;
+ # test for existence of emacs server socket 
+ if [ -e $SERVERSOCKET ]; then
+     echo "using emacsclient"
+     emacsclient -c $FLUFFY;
+ else
+     echo "starting emacs: make tea..."
+     emacs --daemon $FLUFFY & disown ;
+     sleep 10 ;
+     emacsclient -c & disown ;
+ fi;
+}
+
+# Emacs
+alias test_e='e_func'
+alias em='emacs_func'
+alias e='emacsclient_func'
+alias enw='emacsclient -t'
+alias se='sudo_emacs_func'
+alias senw='sudo emacs -nw'
+
+# Programs
+alias r='ranger'
+
+# Directory movement
+alias ws='workspace'
+alias ucsb='cd ~/Documents/UCSB'
+alias apollo='cd ~/Documents/Workspace/ApolloTradingBot'
+
+# SSH
+alias droplet="ssh myles@206.189.162.148"
+alias server48='ssh ubuntu@169.231.234.242'
+alias csil='ssh mylesadams@csil-36.cs.ucsb.edu'
+
+# Git
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
+alias gps='git push'
+alias gpl='git pull'
+
+# Build/make/cmake
+alias cmake-qt-debug='cmake ../ -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt/5.10.1 -DCMAKE_BUILD_TYPE=debug'
+alias cmake-qt-release='cmake ../ -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt/5.10.1 -DCMAKE_BUILD_TYPE=release'
+
+# Useful changes to commands
+alias cp='cp -r'
+alias diff='colordiff'
+alias mkdir='mkdir -pv'
+alias ls='ls -G'
+
+# Useful new commands
+alias myip='curl http://ifconfig.me/ip'
+alias bash_profile='source ~/.bash_profile'
+alias ..='cd ..'
+alias .2='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+# Old, not sure if useful
+alias activate_tf='cd ~/Documents/Workspace/tensorflow; source ./bin/activate'

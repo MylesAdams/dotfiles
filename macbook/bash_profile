@@ -1,0 +1,30 @@
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+if [ -f ~/.nvm/nvm.sh ]; then
+    . ~/.nvm/nvm.sh
+fi
+
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+export EDITOR="emacsclient -t"
+export ALTERNATE_EDITOR=""
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="~/Downloads/google-cloud-sdk/platform/google_appengine:~/Downloads/google-cloud-sdk/bin/:~/Downloads/google-cloud-sdk/platform/google_appengine/google/appengine:~/Downloads/flashwords2-720f9b82a974.json:/System/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/local/opt/openssl/bin:$PATH"
+
+export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3.6/site-packages/tensorflow/models/research/:/usr/local/lib/python3.6/site-packages/tensorflow/models/research/slim:~/Downloads/google-cloud-sdk/bin:~/Downloads/google-cloud-sdk/platform/google_appengine:~/Downloads/google-cloud-sdk/platform/google_appengine/google/appengine"
+
+export GOOGLE_APPLICATION_CREDENTIALS="./credentials.json"
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+PS1='┌─[\T]─[\[\033[0;32m\]\u\[\033[00m\]@\[\033[0;91m\]\h\[\033[00m\]]─[\[\033[0;94m\]\w\[\033[00m\]]-[\[\e[33m\]$(__git_ps1 '%s')\[\033[00m\]]\n└──► '
