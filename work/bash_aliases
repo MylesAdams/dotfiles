@@ -3,9 +3,9 @@ workspace() {
 }
 
 # Emacs
-alias emacs='emacsclient -t'
-alias e='emacsclient -t'
-alias se='sudo emacs -nw'
+#alias emacs='emacsclient -t'
+alias e='emacsclient -c'
+alias se='sudo -u myles emacs'
 
 # Programs
 alias r='ranger'
