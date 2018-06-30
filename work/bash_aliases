@@ -2,9 +2,12 @@ workspace() {
     cd ~/Documents/workspace/$1
 }
 
+emacsclient_func() {
+    nohup emacsclient -c $1 >/dev/null/ 2>&1 & 
+}
+
 # Emacs
-#alias emacs='emacsclient -t'
-alias e='emacsclient -c'
+alias e='emacsclient_func'
 alias se='sudo -u myles emacs'
 
 # Programs

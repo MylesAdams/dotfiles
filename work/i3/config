@@ -151,10 +151,12 @@ bindsym $mod+x workspace next
 bindsym $mod+Shift+x move workspace to output right
 
 # Move focus between screens
-bindsym $mod+Alt+h focus output left
-bindsym $mod+Alt+Left focus output left
-bindsym $mod+Alt+l focus output right
-bindsym $mod+Alt+Right focus output right
+#bindsym $mod+Alt+h focus output left
+#bindsym $mod+Alt+Left focus output left
+#bindsym $mod+Alt+l focus output right
+#bindsym $mod+Alt+Right focus output right
+
+bindsym $mod+Tab focus output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -217,11 +219,12 @@ for_window [class="yakuake"] floating enable;
 exec --no-startup-id chromium-browser
 #exec --no-startup-id tilix
 #exec --no-startup-id tilix
-exec --no-startup-id workspace $workspace3; exec --no-startup-id tilix
-exec --no-startup-id workspace $workspace3; exec --no-startup-id tilix
+exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
+exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
 exec --no-startup-id compton
 exec --no-startup-id redshift
 exec_always --no-startup-id emacs --daemon
+exec --no-startup-id xrandr --output DP-0 --right-of DVI-I-1
 
 # workspace windows
 #assign [class="discord"] $workspace1
@@ -231,7 +234,7 @@ assign [class="Chromium-browser"] $workspace2
 #assign [class="Tilix"] $workspace3
 assign [class="Thunderbird"] $workspace10
 
-#for_window [class="Spotify"] move to workspace $workspace1
+for_window [class="Spotify"] move to workspace $workspace1
 
 exec_always --no-startup-id feh --bg-scale /home/myles/Documents/wallpapers/wallpaper.jpg
 #exec_always ~/.config/polybar/launch.sh

@@ -31,7 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(javascript
-     python
+     (python :variables python-enable-yapf-format-on-save t) 
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -61,7 +61,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(doom-city-lights doom-city-lights-theme-)
+   dotspacemacs-excluded-packages '(doom-city-lights doom-city-lights-theme- evil-search-highlight-persist)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -272,7 +272,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers '(:relative t)
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -289,7 +289,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -343,6 +343,9 @@ you should place your code here."
 
   ;;(setq evil-insert-state-cursor '((box) "green"))
 
+  ;;(setq-default evil-ex-search-highlight-all nil)
+  (setq global-evil-search-highlight-persist nil)
+
   (setq-default indent-tabs-mode nil)
 
   (add-hook 'python-mode-hook '(lambda () 
@@ -353,6 +356,8 @@ you should place your code here."
 
   ;; Set the powerline theme
   ;; (setq dotspacemacs-mode-line-theme '(all-the-icons :separator 'arrow))
+
+  (add-hook 'fundamental-mode-hook 'linum-mode)
 
   ;; Set line-number format
   (unless (display-graphic-p)

@@ -1,0 +1,25 @@
+[/]
+terminal-title-style='none'
+theme-variant='dark'
+window-style='disable-csd-hide-toolbar'
+
+[profiles]
+list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d', 'db689414-8364-4756-a8bd-676340159b0a']
+default='db689414-8364-4756-a8bd-676340159b0a'
+
+[profiles/db689414-8364-4756-a8bd-676340159b0a]
+foreground-color='#D8DEE9'
+visible-name='Myles'
+palette=['#3B4252', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#88C0D0', '#E5E9F0', '#4C566A', '#BF616A', '#A3BE8C', '#EBCB8B', '#81A1C1', '#B48EAD', '#8FBCBB', '#ECEFF4']
+badge-color-set=false
+use-system-font=false
+cursor-colors-set=false
+highlight-colors-set=false
+use-theme-colors=false
+bold-color-set=false
+font='Iosevka Term 12'
+background-color='#2E3440'
+background-transparency-percent=17
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+visible-name='Default'
