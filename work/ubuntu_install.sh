@@ -1,16 +1,13 @@
 #!/bin/bash
 
-# Dotfiles
-git clone https://github.com/MylesAdams/dotfiles.git ./dotfiles
-
 # Make folders
-sudo mkdir ~/Programs
+mkdir ~/Programs
 
 # Update
 sudo apt-get update
 
 # Install programs
-sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 pip3 zip unzip
+sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip thunderbird
 
 # Install snaps
 sudo snap install spotify
@@ -19,10 +16,10 @@ sudo snap install spotify
 pip install appdirs asn1crypto astroid backports.functools-lru-cache beautifulsoup4 certifi chardet configparser cryptography decorator enum34 epc eventlet flake8 fudge funcsigs future futures fuzzywuzzy gmusicapi gpsoauth greenlet httplib2 idna importmagic ipaddress isort keyring keyrings.alt lazy-object-proxy logilab-common lxml mccabe MechanicalSoup mock mutagen netifaces oauth2client pafy pbr pip PlexAPI proboscis protobuf pyasn1 pyasn1-modules pycairo PyChromecast pycodestyle pycountry pycrypto pycryptodomex pyflakes pygobject pylint python-dateutil pyxdg ranger requests rsa SecretStorage setuptools sexpdata simplejson singledispatch six soundcloud spotipy titlecase tizchromecastproxy tizdirbleproxy tizgmusicproxy tizplexproxy tizsoundcloudproxy tizspotifyproxy tizyoutubeproxy tqdm urllib3 validictory websocket-client wheel wrapt yapf youtube-dl zeroconf
 
 # Install Python3 libraries
-pip3 install apturl asn1crypto astroid Brlapi certifi chardet command-not-found cryptography cupshelpers cycler defer distro-info docopt epc flake8 httplib2 idna imageio importmagic isort keyring keyrings.alt kiwisolver language-selector launchpadlib lazr.restfulclient lazr.uri lazy-object-proxy logilab-common louis macaroonbakery Mako MarkupSafe matplotlib mccabe numpy oauth olefile onboard pexpect Pillow pip protobuf pycairo pycodestyle pycrypto pycups pyflakes pygobject pylint pymacaroons PyNaCl pyparsing pyRFC3339 python-apt python-dateutil python-debian pytz pyxdg PyYAML reportlab requests requests-unixsocket scipy screen-resolution-extra SecretStorage setuptools sexpdata simplejson six system-service systemd-python ubuntu-drivers-common ufw unattended-upgrades urllib3 usb-creator wadllib wheel wrapt xdiagnose xkit yapf zope.interface
+pip3 install apturl asn1crypto astroid Brlapi certifi chardet command-not-found cryptography cupshelpers cycler defer distro-info docopt epc flake8 httplib2 idna imageio importmagic isort keyring keyrings.alt kiwisolver language-selector launchpadlib lazr.restfulclient lazr.uri lazy-object-proxy logilab-common louis macaroonbakery Mako MarkupSafe matplotlib mccabe meson numpy oauth olefile onboard pexpect Pillow pip protobuf pycairo pycodestyle pycrypto pycups pyflakes pygobject pylint pymacaroons PyNaCl pyparsing pyRFC3339 python-apt python-dateutil python-debian pytz pyxdg PyYAML reportlab requests requests-unixsocket scipy screen-resolution-extra SecretStorage setuptools sexpdata simplejson six system-service systemd-python ubuntu-drivers-common ufw unattended-upgrades urllib3 usb-creator wadllib wheel wrapt xdiagnose xkit yapf zope.interface
 
 # i3-gaps dependencies
-sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake xcb-util-xrm
+sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake libxcb-xrm-dev feh
 
 # Install i3-gaps
 cd ~/Programs/
@@ -30,17 +27,22 @@ git clone https://www.github.com/Airblader/i3 i3-gaps
 cd i3-gaps
 autoreconf --force --install
 rm -rf build/
-sudo mkdir -p build && cd build/
+mkdir -p build && cd build/
 make -j8
 sudo make install
 cd ~/
 
 # i3blocks script dependencies
-sudo apt-get install playerctl lm-sensors amixer alsa fonts-font-awesome pulseaudio sysstat acpi
+sudo apt-get install lm-sensors alsa pulseaudio sysstat acpi
 
 # Settings up sensors for i3blocks
 sudo sensors-detect
 sudo service kmod start
+
+# Install playerctl
+wget https://github.com/acrisci/playerctl/releases/download/v0.6.1/playerctl-0.6.1_amd64.deb -P ~/Downloads/
+sudo apt install ~/Downloads/playerctl-0.6.1_amd64.deb
+sudo rm playerctl-0.6.1_amd64.deb
 
 # Install i3blocks-gaps
 cd ~/Programs/
@@ -61,7 +63,7 @@ sudo cp ~/dotfiles/work/i3/config ~/.config/i3/config
 # i3-blocks setup
 sudo cp ~/dotfiles/work/i3blocks/i3blocks.conf ~/.i3blocks.conf
 shopt -s extglob
-sudo cp !(~/dotfiles/work/i3blocks/*.conf) /usr/local/libexec/i3blocks/
+sudo cp ~/dotfiles/work/i3blocks/!(*.conf) /usr/local/libexec/i3blocks/
 shopt -u extglob
 
 # Compton setup
@@ -86,7 +88,7 @@ cd ~/Downloads/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FantasqueSansMono.zip
 unzip FantasqueSansMono.zip -d fantasque
 shopt -s extglob
-sudo cp !(./fantasque/*Windows*) /usr/local/share/fonts/
+sudo cp ./fantasque/!(*Windows*) /usr/local/share/fonts/
 shopt -u extglob
 
 wget https://github.com/be5invis/Iosevka/releases/download/v1.14.3/02-iosevka-term-1.14.3.zip
@@ -104,5 +106,19 @@ sudo rm -r all-the-icons.el
 cd ~/
 
 # Wallpaper setup
-sudo mkdir ~/Documents/wallpapers/
+mkdir ~/Documents/wallpapers/
 sudo cp ~/dotfiles/work/wallpaper.jpg ~/Documents/wallpapers/
+
+bool=0
+while [[ $bool == 0 ]]; do
+    bool=1
+    read -p "You must restart to enable i3. Would you like to do so now? (y/n)" restart
+    if [[ "$restart" == "y" || "$restart" == "Y" ]]; then
+	      sudo reboot
+    elif [[ "$restart" == "n" || "$restart" == "N" ]]; then
+        echo "Setup finished."
+    else
+        bool=0
+        echo "Invalid input"
+    fi
+done
