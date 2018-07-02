@@ -3,11 +3,14 @@
 # Make folders
 mkdir ~/Programs
 
-# Update
+# Nvidia Drivers and Update
+sudo apt-get purge nvidia*
+sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt-get update
+sudo apt install nvidia-396
 
 # Install programs
-sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip thunderbird
+sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip thunderbird colordiff
 
 # Install snaps
 sudo snap install spotify

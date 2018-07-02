@@ -177,15 +177,15 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 5 ppt
+        bindsym h resize shrink width 10 px or 5 ppt
+        bindsym j resize shrink height 10 px or 5 ppt
         bindsym k resize grow height 10 px or 5 ppt
-        bindsym l resize shrink height 10 px or 5 ppt
-        bindsym semicolon resize grow width 10 px or 5 ppt #
+        bindsym l resize grow width 10 px or 5 ppt #
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 5 ppt
-        bindsym Down resize grow height 10 px or 5 ppt
-        bindsym Up resize shrink height 10 px or 5 ppt
+        bindsym Down resize shrink height 10 px or 5 ppt
+        bindsym Up resize grow height 10 px or 5 ppt
         bindsym Right resize grow width 10 px or 5 ppt
 
         # back to normal: Enter or Escape
@@ -217,8 +217,8 @@ for_window [class="yakuake"] floating enable;
 
 # Startup Execution
 exec --no-startup-id chromium-browser
-#exec --no-startup-id tilix
-#exec --no-startup-id tilix
+exec --no-startup-id thunderbird
+exec --no-startup-id spotify
 exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
 exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
 exec --no-startup-id compton
@@ -227,17 +227,14 @@ exec_always --no-startup-id emacs --daemon
 exec --no-startup-id xrandr --output DP-0 --right-of DVI-I-1
 
 # workspace windows
-#assign [class="discord"] $workspace1
-#assign [class="Spotify"] $workspace1
+assign [class="Spotify"] $workspace1
 assign [class="Firefox"] $workspace2
 assign [class="Chromium-browser"] $workspace2
-#assign [class="Tilix"] $workspace3
 assign [class="Thunderbird"] $workspace10
 
 for_window [class="Spotify"] move to workspace $workspace1
 
 exec_always --no-startup-id feh --bg-scale /home/myles/Documents/wallpapers/wallpaper.jpg
-#exec_always ~/.config/polybar/launch.sh
 
 # Custom Scripts
 bindsym $mod+Ctrl+l exec fancylock
