@@ -163,7 +163,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+Escape exec ~/.config/i3/exit_menu.sh
 
 # Audio controls (now provided by Plasma)
 bindsym $mod+Down exec amixer -D pulse sset Master 5%-
@@ -200,7 +200,7 @@ bar {
         strip_workspace_numbers yes
         verbose no
         position top
-        height 32
+        height 26
         status_command i3blocks
         i3bar_command i3bar -t
         font pango:FantasqueSansMonoNerdFont, Regular 15
