@@ -22,7 +22,7 @@ pip install appdirs asn1crypto astroid backports.functools-lru-cache beautifulso
 pip3 install apturl asn1crypto astroid Brlapi certifi chardet command-not-found cryptography cupshelpers cycler defer distro-info docopt epc flake8 httplib2 idna imageio importmagic isort keyring keyrings.alt kiwisolver language-selector launchpadlib lazr.restfulclient lazr.uri lazy-object-proxy logilab-common louis macaroonbakery Mako MarkupSafe matplotlib mccabe meson numpy oauth olefile onboard pexpect Pillow pip protobuf pycairo pycodestyle pycrypto pycups pyflakes pygobject pylint pymacaroons PyNaCl pyparsing pyRFC3339 python-apt python-dateutil python-debian pytz pyxdg PyYAML reportlab requests requests-unixsocket scipy screen-resolution-extra SecretStorage setuptools sexpdata simplejson six system-service systemd-python ubuntu-drivers-common ufw unattended-upgrades urllib3 usb-creator wadllib wheel wrapt xdiagnose xkit yapf zope.interface
 
 # i3-gaps dependencies
-sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake libxcb-xrm-dev feh
+sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake feh dmenu
 
 # Install i3-gaps
 cd ~/Programs/
@@ -37,7 +37,7 @@ sudo make install
 cd ~/
 
 # i3blocks script dependencies
-sudo apt-get install lm-sensors alsa pulseaudio sysstat acpi
+sudo apt-get install lm-sensors alsa-base pulseaudio sysstat acpi
 
 # Settings up sensors for i3blocks
 sudo sensors-detect
@@ -64,6 +64,7 @@ source ~/.bashrc
 # i3-gaps setup
 mkdir ~/.config/i3/
 sudo cp ~/dotfiles/work/i3/config ~/.config/i3/config
+sudo cp ~/dotfiles/work/i3/exit_menu.sh ~/.config/i3/
 
 # i3-blocks setup
 sudo cp ~/dotfiles/work/i3blocks/i3blocks.conf ~/.i3blocks.conf
