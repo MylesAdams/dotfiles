@@ -14,27 +14,7 @@ function emacsclient_func() {
     emacsclient -c $1 &
 }
 
-function e_func()
-{
- echo "emacs function backgrounds and disowns emacs, or calls client if server already running; see .bashrc";
- local FLUFFY="$@";
- local SERVERSOCKET=/tmp/emacs${UID}/server ;
- echo "trying to open: " $FLUFFY 
- echo " checking: " $SERVERSOCKET "for emacs server " ;
- # test for existence of emacs server socket 
- if [ -e $SERVERSOCKET ]; then
-     echo "using emacsclient"
-     emacsclient -c $FLUFFY;
- else
-     echo "starting emacs: make tea..."
-     emacs --daemon $FLUFFY & disown ;
-     sleep 10 ;
-     emacsclient -c & disown ;
- fi;
-}
-
 # Emacs
-alias test_e='e_func'
 alias em='emacs_func'
 alias e='emacsclient_func'
 alias enw='emacsclient -t'
