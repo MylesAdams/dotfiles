@@ -31,6 +31,7 @@ cd i3-gaps
 autoreconf --force --install
 rm -rf build/
 mkdir -p build && cd build/
+../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
 make -j8
 sudo make install
 cd ~/
@@ -61,6 +62,7 @@ sudo cp ~/dotfiles/work/bash_aliases ~/.bash_aliases
 source ~/.bashrc
 
 # i3-gaps setup
+mkdir ~/.config/i3/
 sudo cp ~/dotfiles/work/i3/config ~/.config/i3/config
 
 # i3-blocks setup
@@ -76,6 +78,7 @@ sudo cp ~/dotfiles/work/compton/compton.conf ~/.config/compton.conf
 sudo mkdir -p ~/.config/tilix/schemes/
 sudo cp ~/dotfiles/work/tilix/themes/nord.json ~/.config/tilix/schemes/
 dconf load /com/gexperts/Tilix/ < ~/dotfiles/work/tilix/tilix.dconf
+sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
 
 # Ranger setup
 ranger --copy-config=all
