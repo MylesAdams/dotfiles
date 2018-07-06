@@ -1,3 +1,7 @@
+#################################
+#### Aesthetic Customization ####
+#################################
+
 # (No) Title Bars
 for_window [class="^.*"] border pixel 0
 
@@ -24,6 +28,11 @@ set $darkwhite   #a89984
 set $background  #000000
 set $transparent #00000000
 
+
+#######################################
+#### System Settings/Customization ####
+#######################################
+
 # Windows button
 set $mod Mod4
 
@@ -47,14 +56,22 @@ bindsym $mod+Return exec tilix
 # Kill focused window
 bindsym $mod+Shift+q kill
 
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+Escape exec ~/scripts/exiti3.sh 
+
 # rofi
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -i -dmenu -font "IBM Plex Sans Medium 15" '
 # Screenshot
 bindsym Print exec --no-startup-id spectacle
 
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+#########################
+#### Window Controls ####
+#########################
 
 # change focus
 bindsym $mod+h focus left
@@ -63,10 +80,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-#bindsym $mod+Left focus left
-#bindsym $mod+Down focus down
-#bindsym $mod+Up focus up
-#bindsym $mod+Right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -75,15 +92,19 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-#bindsym $mod+Shift+Left move left
-#bindsym $mod+Shift+Down move down
-#bindsym $mod+Shift+Up move up
-#bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
-# bindsym $mod+space exec rofi -show run
+# Move focus between screens
+bindsym $mod+Alt+h focus output left
+bindsym $mod+Alt+Left focus output left
+bindsym $mod+Alt+l focus output right
+bindsym $mod+Alt+Right focus output right
 
 # split in horizontal orientation
-bindsym $mod+c split c
+bindsym $mod+c split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -108,17 +129,22 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+
+####################
+#### Workspaces ####
+####################
+
 # workspace names
-set $workspace1 "1:"
-set $workspace2 "2:"
-set $workspace3 "3:"
-set $workspace4 "4:"
-set $workspace5 "5:5"
-set $workspace6 "6:6"
-set $workspace7 "7:7"
-set $workspace8 "8:8"
-set $workspace9 "9:9"
-set $workspace10 "10:"
+set $workspace1 "1:   Media "
+set $workspace2 "2:   Web  "
+set $workspace3 "3:   Term "
+set $workspace4 "4:   Code "
+set $workspace5 "5:      5     "
+set $workspace6 "6:      6     "
+set $workspace7 "7:      7     "
+set $workspace8 "8:      8     "
+set $workspace9 "9:      9     "
+set $workspace10 "10:   Email "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -137,33 +163,18 @@ bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5 
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6  
+bindsym $mod+Shift+7 move container to workspace $workspace7 
+bindsym $mod+Shift+8 move container to workspace $workspace8 
+bindsym $mod+Shift+9 move container to workspace $workspace9 
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
-# relative workspace moves
-bindsym $mod+z workspace prev
-bindsym $mod+x workspace next
 
-# Move focus between screens
-bindsym $mod+Alt+h focus output left
-bindsym $mod+Alt+Left focus output left
-bindsym $mod+Alt+l focus output right
-bindsym $mod+Alt+Right focus output right
+########################
+#### Audio Controls ####
+########################
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# Audio controls
-#bindsym $mod+Down exec amixer -D pulse sset Master 5%-
-#bindsym $mod+Up exec amixer -D pulse sset Master 5%+
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ #increase sound volume
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- #decrease sound volume
@@ -174,6 +185,11 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioStop exec playerctl stop 
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+
+####################################
+#### Modes and Mode keybindings ####
+####################################
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -186,7 +202,7 @@ mode "resize" {
         bindsym h resize shrink width 10 px or 5 ppt
         bindsym j resize grow height 10 px or 5 ppt
         bindsym k resize shrink height 10 px or 5 ppt
-        bindsym l resize grow width 10 px or 5 ppt 
+        bindsym l resize grow width 10 px or 5 ppt
 
         # same bindings, but for the arrow keys
         #bindsym Left resize shrink width 10 px or 5 ppt
@@ -199,9 +215,19 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+mode "" {
+     bindsym Escape exec --no-startup-id tilix --quake; mode "default"
+     bindsym $mod+grave exec --no-startup-id tilix --quake; mode "default"
+}
 
-#i3bar
+bindsym $mod+r mode "resize"
+bindsym $mod+grave exec --no-startup-id tilix --quake; mode ""
+
+
+###############
+#### i3bar ####
+###############
+
 bar {
         strip_workspace_numbers yes
         verbose no
@@ -209,8 +235,8 @@ bar {
         height 32
         status_command i3blocks
         i3bar_command i3bar -t
-        font pango:DejaVu Sans Mono, Awesome 8
         font pango:FantasqueSansMonoNerdFont, Regular 15
+        font pango:Font Awesome,San Fransico Display 15
         separator_symbol "|"
         colors {
               background #35445830
@@ -219,47 +245,41 @@ bar {
         }
 }
 
-# Starting things with i3
-# exec --no-startup-id xcompmgr -C &    # Bare compositor to allow transparency
-for_window [class="yakuake"] floating enable;
+###########################
+#### Startup Execution ####
+###########################
 
-## Plasma Integration
-# Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everythiing)
-#exec --no-startup-id wmctrl -c Plasma
-#for_window [title="Desktop — Plasma"] kill; floating enable; border none
-
-## Avoid tiling popups, dropdown windows from plasma
-# for the first time, manually resize them, i3 will remember the setting for floating windows
-#for_window [class="plasmashell"] floating enable;
-#for_window [class="Plasma"] floating enable; border none
-#for_window [title="plasma-desktop"] floating enable; border none
-#for_window [title="win7"] floating enable; border none
-#for_window [class="krunner"] floating enable; border none
-#for_window [class="Kmix"] floating enable; border none
-#for_window [class="Klipper"] floating enable; border none
-#for_window [class="Plasmoidviewer"] floating enable; border none
-
-
-# Startup Execution
+# Gui Programs
 exec --no-startup-id discord
-exec --no-startup-id spotify
-exec --no-startup-id google-chrome --password-store=gnome
-exec --no-startup-id tilix
-exec --no-startup-id tilix
+exec --no-startup-id chromium-browser
+exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
+exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
 exec --no-startup-id mailspring
-exec_always feh --bg-scale /home/myles/Documents/matterhorn.png
-exec_always compton
-exec redshift
+exec --no-startup-id spotify
 
-# workspace windows
+# Startup Scripts
+exec_always --no-startup-id feh --bg-scale /home/myles/Documents/matterhorn.png
+
+# Background services/daemons
+exec --no-startup-id compton
+exec --no-startup-id redshift
+exec --no-startup-id /usr/lib/notification-daemon/notification-daemon
+exec --no-startup-id emacs --daemon
+exec --no-startup-id setxkbmap -option caps:swapescape
+exec --no-startup-id nvidia-settings
+exec --no-startup-id ~/scripts/kill_nvidia-settings.sh
+
+# Workspace windows
 assign [class="discord"] $workspace1
 assign [class="Spotify"] $workspace1
-assign [class="Google-chrome"] $workspace2
-assign [class="Tilix"] $workspace3
+assign [class="Chromium-browser"] $workspace2
+assign [class="Firefox"] $workspace2
 assign [class="Mailspring"] $workspace10
 
 for_window [class="Spotify"] move to workspace $workspace1
 
-# Custom Scripts
-bindsym $mod+Ctrl+l exec fancylock
-bindsym $mod+Ctrl+v workspace $workspace4; exec zathura ~/Documents/Coding/Vim-Cheat-Sheet.pdf
+# Custom Scripts/Keybinds
+bindsym $mod+Ctrl+l exec --no-startup-id fancylock
+bindsym $mod+Ctrl+v i3-msg 'workspace $workspace4; exec --no-startup-id zathura ~/Documents/Coding/Vim-Cheat-Sheet.pdf'
+bindsym $mod+Shift+e exec --no-startup-id emacsclient -c
+bindsym $mod+Shift+i exec --no-startup-id chromium-browser

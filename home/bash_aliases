@@ -2,10 +2,22 @@ workspace() {
     cd ~/Documents/workspace/$1
 }
 
+emacs_func() {
+    emacs $1 &
+}
+
+sudo_emacs_func() {
+    sudo emacs $1 &
+}
+
+emacsclient_func() {
+    nohup emacsclient -c $1 >/dev/null 2>&1 &
+}
+
 # Emacs
-alias emacs='emacsclient -t'
-alias e='emacsclient -t'
-alias se='sudo emacs -nw'
+alias em='emacs_func'
+alias e='emacsclient_func'
+alias se='sudo_emacs_func'
 
 # Programs
 alias r='ranger'
@@ -13,17 +25,19 @@ alias r='ranger'
 # Directory movement
 alias ws='workspace'
 alias ucsb='cd ~/Documents/UCSB'
-alias d='cd ~/Documents/'
+alias gd='cd ~/Documents/'
 
 # SSH
 alias droplet='ssh myles@206.189.162.148'
+alias server48='ssh ubuntu@169.231.234.242'
+alias csil='ssh mylesadams@csil-36.cs.ucsb.edu'
 
 # Git
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit -m'
-alias gp='git push'
-alias om='origin master'
+alias gps='git push'
+alias gpl='git pull'
 
 # Useful changes to commands
 alias cp='cp -r'
@@ -32,6 +46,7 @@ alias mkdir='mkdir -pv'
 
 # Useful new commands
 alias myip='curl http://ifconfig.me/ip'
+alias bashrc='source ~/.bashrc'
 alias ..='cd ..'
 alias .2='cd ../..'
 alias .3='cd ../../..'
