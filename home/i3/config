@@ -61,10 +61,10 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+Escape exec ~/scripts/exiti3.sh 
+bindsym $mod+Shift+Escape exec ~/scripts/exit_menu.sh 
 
 # rofi
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -i -dmenu -font "IBM Plex Sans Medium 15" '
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -i -dmenu -font "IBM Plex Sans Medium 15" -p "run" '
 # Screenshot
 bindsym Print exec --no-startup-id spectacle
 
@@ -215,13 +215,13 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-mode "" {
+mode "  Quake" {
      bindsym Escape exec --no-startup-id tilix --quake; mode "default"
      bindsym $mod+grave exec --no-startup-id tilix --quake; mode "default"
 }
 
 bindsym $mod+r mode "resize"
-bindsym $mod+grave exec --no-startup-id tilix --quake; mode ""
+bindsym $mod+grave exec --no-startup-id tilix --quake; mode "  Quake"
 
 
 ###############
@@ -240,8 +240,10 @@ bar {
         separator_symbol "|"
         colors {
               background #35445830
-              separator #330066
+              separator #fdf6e3
               statusline #fdf6e3
+
+              binding_mode #222222 #772832 #858585
         }
 }
 
@@ -252,8 +254,8 @@ bar {
 # Gui Programs
 exec --no-startup-id discord
 exec --no-startup-id chromium-browser
-exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
-exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
+#exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
+#exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
 exec --no-startup-id mailspring
 exec --no-startup-id spotify
 
@@ -263,11 +265,12 @@ exec_always --no-startup-id feh --bg-scale /home/myles/Documents/matterhorn.png
 # Background services/daemons
 exec --no-startup-id compton
 exec --no-startup-id redshift
-exec --no-startup-id /usr/lib/notification-daemon/notification-daemon
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id emacs --daemon
 exec --no-startup-id setxkbmap -option caps:swapescape
 exec --no-startup-id nvidia-settings
 exec --no-startup-id ~/scripts/kill_nvidia-settings.sh
+exec --no-startup-id ~/scripts/i3_startup_layout.sh
 
 # Workspace windows
 assign [class="discord"] $workspace1

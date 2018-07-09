@@ -30,7 +30,7 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(javascript
      python
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -293,7 +293,8 @@ values."
    dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
-   ;; Not used for now. (default nil)
+   ;; Not used for now. (default nil
+)
    dotspacemacs-default-package-repository nil
    ;; Delete whitespace while saving buffer. Possible values are `all'
    ;; to aggressively delete empty line and long sequences of whitespace,
@@ -301,7 +302,7 @@ values."
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
-   ))
+   )
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -321,7 +322,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   ;; Source .bash_profile
-  (shell-command "source ~/.bash_profile")
+  (shell-command "source ~/.bashrc")
 
   ;;(setq persp-auto-save-opt 0)
 
@@ -336,7 +337,7 @@ you should place your code here."
 
   (use-package spaceline-all-the-icons)
 
-  (use-package spaceline-all-the-icons 
+  (use-package spaceline-all-the-icons
     :after spaceline
     :config (spaceline-all-the-icons-theme))
 
@@ -350,7 +351,7 @@ you should place your code here."
 
   ;; Set line-number format
   (unless (display-graphic-p)
-    (setq linum-relative-format "%s "))
+    (setq linum-relative-format "%3s "))
 
    ;; Function for copying to clipboard
    (defun copy-to-clipboard ()
@@ -390,6 +391,7 @@ you should place your code here."
      (global-set-key (kbd "<mouse-5>") 'scroll-up-line)
      )
 
+   (evil-leader/set-key "o l" 'imenu-list-smart-toggle)
 
    ;; Copy and paste from clipboard using 'SPC-o-y/p'
    (evil-leader/set-key "o y" 'copy-to-clipboard)
