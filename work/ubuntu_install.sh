@@ -10,7 +10,10 @@ sudo apt-get update
 sudo apt install nvidia-396
 
 # Install programs
-sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip thunderbird colordiff
+sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip thunderbird 
+
+# Install utilities
+sudo apt-get install colordiff curl
 
 # Install snaps
 sudo snap install spotify
@@ -22,7 +25,10 @@ pip install appdirs asn1crypto astroid backports.functools-lru-cache beautifulso
 pip3 install apturl asn1crypto astroid Brlapi certifi chardet command-not-found cryptography cupshelpers cycler defer distro-info docopt epc flake8 httplib2 idna imageio importmagic isort keyring keyrings.alt kiwisolver language-selector launchpadlib lazr.restfulclient lazr.uri lazy-object-proxy logilab-common louis macaroonbakery Mako MarkupSafe matplotlib mccabe meson numpy oauth olefile onboard pexpect Pillow pip protobuf pycairo pycodestyle pycrypto pycups pyflakes pygobject pylint pymacaroons PyNaCl pyparsing pyRFC3339 python-apt python-dateutil python-debian pytz pyxdg PyYAML reportlab requests requests-unixsocket scipy screen-resolution-extra SecretStorage setuptools sexpdata simplejson six system-service systemd-python ubuntu-drivers-common ufw unattended-upgrades urllib3 usb-creator wadllib wheel wrapt xdiagnose xkit yapf zope.interface
 
 # i3-gaps dependencies
-sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake feh dmenu
+sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
+
+# non-critical i3-gaps dependencies (scripts and stuff)
+sudo apt-get install feh dmenu kde-spectacle wmctrl
 
 # Install i3-gaps
 cd ~/Programs/

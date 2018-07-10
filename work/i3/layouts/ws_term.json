@@ -1,0 +1,128 @@
+// vim:ts=4:sw=4:et
+{
+    // splitv split container with 2 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.311451283135928,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 482,
+               "width": 642,
+               "x": 0,
+               "y": 0
+            },
+            "name": "Tilix: Default",
+            "percent": 0.399009900990099,
+            "swallows": [
+               {
+               "class": "^Tilix$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "pixel",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 482,
+               "width": 642,
+               "x": 0,
+               "y": 0
+            },
+            "name": "Tilix: Default",
+            "percent": 0.600990099009901,
+            "swallows": [
+               {
+                "class": "^Tilix$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
+{
+    // splith split container with 2 children
+    "border": "normal",
+    "floating": "auto_off",
+    "layout": "splith",
+    "percent": 0.688548716864072,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 482,
+               "width": 642,
+               "x": 0,
+               "y": 0
+            },
+            "name": "Tilix: Default",
+            "percent": 0.5,
+            "swallows": [
+               {
+                "class": "^Tilix$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            // splitv split container with 2 children
+            "border": "normal",
+            "floating": "auto_off",
+            "layout": "splitv",
+            "percent": 0.5,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 0,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 482,
+                       "width": 642,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "Tilix: Default",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Tilix$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 0,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 482,
+                       "width": 642,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "Tilix: Default",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Tilix$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
+

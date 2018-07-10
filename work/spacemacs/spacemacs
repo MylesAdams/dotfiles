@@ -361,7 +361,7 @@ you should place your code here."
 
   ;; Set line-number format
   (unless (display-graphic-p)
-    (setq linum-relative-format "%s "))
+    (setq linum-relative-format "%3s "))
 
    ;; Function for copying to clipboard
    (defun copy-to-clipboard ()
@@ -404,6 +404,8 @@ you should place your code here."
    (with-eval-after-load 'helm
      (define-key helm-map (kbd "C-d") 'helm-next-page)
      (define-key helm-map (kbd "C-u") 'helm-previous-page))
+
+   (evil-leader/set-key "o l" 'imenu-list-smart-toggle)
 
    ;; Copy and paste from clipboard using 'SPC-o-y/p'
    (evil-leader/set-key "o y" 'copy-to-clipboard)
