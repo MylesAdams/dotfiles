@@ -2,8 +2,8 @@ workspace() {
     cd ~/Documents/workspace/$1
 }
 
-emacs_func() {
-    emacs $1 &
+emacs_term_func() {
+    emacsclient -t $1
 }
 
 sudo_emacs_func() {
@@ -15,7 +15,7 @@ emacsclient_func() {
 }
 
 # Emacs
-alias em='emacs_func'
+alias em='emacs_term_func'
 alias e='emacsclient_func'
 alias se='sudo_emacs_func'
 
@@ -26,6 +26,7 @@ alias r='ranger'
 alias ws='workspace'
 alias ucsb='cd ~/Documents/UCSB'
 alias gd='cd ~/Documents/'
+alias dotfiles='cd ~/dotfiles'
 
 # SSH
 alias droplet='ssh myles@206.189.162.148'
