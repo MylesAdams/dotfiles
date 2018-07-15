@@ -64,69 +64,69 @@ sudo make install
 cd ~/
 
 # Bash setup
-sudo cp ~/dotfiles/home/bashrc ~/.bashrc
-sudo cp ~/dotfiles/home/bash_aliases ~/.bash_aliases
+sudo cp -r ~/dotfiles/home/bashrc ~/.bashrc
+sudo cp -r ~/dotfiles/home/bash_aliases ~/.bash_aliases
 source ~/.bashrc
 
 # i3-gaps setup
 mkdir -p ~/.config/i3/layouts
-sudo cp ~/dotfiles/home/i3/config ~/.config/i3/config
-sudo cp ~/dotfiles/home/i3/layouts/* ~/.config/i3/layouts/
+sudo cp -r ~/dotfiles/home/i3/config ~/.config/i3/config
+sudo cp -r ~/dotfiles/home/i3/layouts/* ~/.config/i3/layouts/
 
 # i3-blocks setup
-sudo cp ~/dotfiles/home/i3blocks/i3blocks.conf ~/.i3blocks.conf
+sudo cp -r ~/dotfiles/home/i3blocks/i3blocks.conf ~/.i3blocks.conf
 shopt -s extglob
-sudo cp ~/dotfiles/home/i3blocks/!(*.conf) /usr/local/libexec/i3blocks/
+sudo cp -r ~/dotfiles/home/i3blocks/!(*.conf) /usr/local/libexec/i3blocks/
 shopt -u extglob
 
 # Compton setup
-sudo cp ~/dotfiles/home/compton/compton.conf ~/.config/compton.conf
+sudo cp -r ~/dotfiles/home/compton/compton.conf ~/.config/compton.conf
 
 # Dunst setup
 mkdir ~/.config/dunst/
-sudo cp ~/dotfiles/home/dunst/dunstrc ~/.config/dunst/
+sudo cp -r ~/dotfiles/home/dunst/dunstrc ~/.config/dunst/
 
 # Tilix setup
 sudo mkdir -p ~/.config/tilix/schemes/
-sudo cp ~/dotfiles/home/tilix/themes/nord.json ~/.config/tilix/schemes/
+sudo cp -r ~/dotfiles/home/tilix/themes/Chalk_slight_change.json ~/.config/tilix/schemes/
 dconf load /com/gexperts/Tilix/ < ~/dotfiles/home/tilix/tilix.dconf
 sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
 
 # Ranger setup
 ranger --copy-config=all
-sudo cp ~/dotfiles/home/ranger/rc.conf ~/.config/ranger/
+sudo cp -r ~/dotfiles/home/ranger/rc.conf ~/.config/ranger/
 
 # Rofi setup
 mkdir ~/.config/rofi/
-sudo cp ~/dotfiles/home/rofi/* ~/.config/rofi/
+sudo cp -r ~/dotfiles/home/rofi/* ~/.config/rofi/
 
 # Spacemacs setup
 sudo rm -r ~/.emacs.d/
 git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-sudo cp ~/dotfiles/home/spacemacs/spacemacs ~/.spacemacs
+sudo cp -r ~/dotfiles/home/spacemacs/spacemacs ~/.spacemacs
 
 # Other setup
 # Scripts
-sudo cp ~/dotfiles/home/scripts/* ~/scripts/
+sudo cp -r ~/dotfiles/home/scripts/* ~/scripts/
 # Gotop
 git clone --depth 1 https://github.com/cjbassi/gotop /tmp/gotop
 /tmp/gotop/scripts/download.sh
-mv gotop /usr/local/bin
+sudo mv ~/gotop /usr/local/bin
 
 # Fonts setup
 cd ~/Downloads/
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FantasqueSansMono.zip
 unzip FantasqueSansMono.zip -d fantasque
 shopt -s extglob
-sudo cp ./fantasque/!(*Windows*) /usr/local/share/fonts/
+sudo cp -r ./fantasque/!(*Windows*) /usr/local/share/fonts/
 shopt -u extglob
 
 wget https://github.com/be5invis/Iosevka/releases/download/v1.14.3/02-iosevka-term-1.14.3.zip
 unzip 02-iosevka-term-1.14.3.zip -d iosevka
-sudo cp ./iosevka/ttf/* /usr/local/share/fonts/
+sudo cp -r ./iosevka/ttf/* /usr/local/share/fonts/
 
 git clone https://github.com/domtronn/all-the-icons.el.git
-sudo cp ./all-the-icons.el/fonts/*.ttf /usr/local/share/fonts/
+sudo cp -r ./all-the-icons.el/fonts/*.ttf /usr/local/share/fonts/
 
 sudo rm FantasqueSansMono.zip
 sudo rm -r fantasque
@@ -137,7 +137,7 @@ cd ~/
 
 # Wallpaper setup
 mkdir ~/Documents/wallpapers/
-sudo cp ~/dotfiles/home/wallpaper.jpg ~/Documents/wallpapers/
+sudo cp -r ~/dotfiles/home/wallpaper.jpg ~/Documents/wallpapers/
 
 bool=0
 while [[ $bool == 0 ]]; do
