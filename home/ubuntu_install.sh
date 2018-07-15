@@ -8,16 +8,16 @@ mkdir ~/scripts
 sudo apt-get purge nvidia*
 sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt-get update
-sudo apt install nvidia-390
+sudo apt install -y nvidia-390
 
 # Install programs
-sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip dunst
+sudo apt-get install -y chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip dunst
 
 # Install utilities
-sudo apt-get install colordiff curl
+sudo apt-get install -y colordiff curl
 
 # Install snaps
-sudo snap install spotify discord mailspring
+sudo snap install spotify discord
 
 # Python 2 Libraries
 pip install ansible apache-libcloud asn1crypto certifi chardet Cheetah cryptography enum34 funcsigs httplib2 idna ipaddress Jinja2 jmespath keyring keyrings.alt lockfile MarkupSafe mock netaddr paramiko pbr pip pyasn1 pycrypto pycurl pygobject pykerberos pyOpenSSL pyxdg PyYAML ranger requests SecretStorage setuptools simplejson six spectacle urlgrabber urllib3 wheel xmltodict
@@ -26,10 +26,10 @@ pip install ansible apache-libcloud asn1crypto certifi chardet Cheetah cryptogra
 pip install apt-xapian-index apturl asn1crypto Brlapi certifi chardet command-not-found cryptography cupshelpers defer distro-info httplib2 idna keyring keyrings.alt language-selector launchpadlib lazr.restfulclient lazr.uri louis macaroonbakery Mako MarkupSafe oauth olefile pexpect Pillow pip protobuf pycairo pycrypto pycups pygobject pymacaroons PyNaCl PyQt5 PyQt5-sip pyRFC3339 python-apt python-debian pytz pyxdg PyYAML reportlab requests requests-unixsocket ruamel.yaml screen-resolution-extra SecretStorage setuptools simplejson six system-service systemd-python ubuntu-drivers-common ufw unattended-upgrades urllib3 usb-creator wadllib wheel whither xkit zope.interface
 
 # i3-gaps dependencies
-sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
+sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
 
 # Non-critical i3-gaps dependencies (scripts and stuff)
-sudo apt-get install feh dmenu kde-spectacle wmctrl
+sudo apt-get install -y feh dmenu kde-spectacle wmctrl
 
 # Install i3-gaps
 cd ~/Programs/
@@ -44,7 +44,7 @@ sudo make install
 cd ~/
 
 # i3blocks script dependencies
-sudo apt-get install lm-sensors alsa-base pulseaudio sysstat acpi
+sudo apt-get install -y lm-sensors alsa-base pulseaudio sysstat acpi
 
 # Settings up sensors for i3blocks
 sudo sensors-detect
@@ -52,7 +52,7 @@ sudo service kmod start
 
 # Install playerctl
 wget https://github.com/acrisci/playerctl/releases/download/v0.6.1/playerctl-0.6.1_amd64.deb -P ~/Downloads/
-sudo apt install ~/Downloads/playerctl-0.6.1_amd64.deb
+sudo apt install -y ~/Downloads/playerctl-0.6.1_amd64.deb
 sudo rm playerctl-0.6.1_amd64.deb
 
 # Install i3blocks-gaps
@@ -69,7 +69,7 @@ sudo cp ~/dotfiles/home/bash_aliases ~/.bash_aliases
 source ~/.bashrc
 
 # i3-gaps setup
-mkdir ~/.config/i3/layouts
+mkdir -p ~/.config/i3/layouts
 sudo cp ~/dotfiles/home/i3/config ~/.config/i3/config
 sudo cp ~/dotfiles/home/i3/layouts/* ~/.config/i3/layouts/
 
