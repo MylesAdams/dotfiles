@@ -260,10 +260,10 @@ exec --no-startup-id mailspring
 exec --no-startup-id spotify
 
 # Startup Scripts
-exec_always --no-startup-id feh --bg-scale /home/myles/Documents/matterhorn.png
+exec_always --no-startup-id feh --bg-scale /home/myles/Documents/wallpapers/wallpaper.jpg
 
 # Background services/daemons
-exec --no-startup-id compton
+exec --no-startup-id compton -b
 exec --no-startup-id redshift
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id emacs --daemon

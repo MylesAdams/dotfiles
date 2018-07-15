@@ -4,21 +4,15 @@
     "border": "normal",
     "floating": "auto_off",
     "layout": "splitv",
-    "percent": 0.233333333333333,
+    "percent": 0.261036789297659,
     "type": "con",
     "nodes": [
         {
             "border": "pixel",
             "current_border_width": 0,
             "floating": "auto_off",
-            "geometry": {
-               "height": 482,
-               "width": 642,
-               "x": 0,
-               "y": 0
-            },
             "name": "Tilix: myles-ubuntu",
-            "percent": 0.3,
+            "percent": 0.282955266955267,
             "swallows": [
                {
                 "class": "^Tilix$"
@@ -31,19 +25,13 @@
             "border": "normal",
             "floating": "auto_off",
             "layout": "splitv",
-            "percent": 0.7,
+            "percent": 0.717044733044733,
             "type": "con",
             "nodes": [
                 {
                     "border": "pixel",
                     "current_border_width": 0,
                     "floating": "auto_off",
-                    "geometry": {
-                       "height": 482,
-                       "width": 642,
-                       "x": 0,
-                       "y": 0
-                    },
                     "name": "Tilix: myles-ubuntu",
                     "percent": 1,
                     "swallows": [
@@ -63,21 +51,15 @@
     "border": "normal",
     "floating": "auto_off",
     "layout": "splitv",
-    "percent": 0.383333333333333,
+    "percent": 0.3694816053511705,
     "type": "con",
     "nodes": [
         {
             "border": "pixel",
             "current_border_width": 0,
             "floating": "auto_off",
-            "geometry": {
-               "height": 482,
-               "width": 642,
-               "x": 0,
-               "y": 0
-            },
             "name": "Tilix: myles-ubuntu",
-            "percent": 0.3,
+            "percent": 0.282955266955267,
             "swallows": [
                {
                 "class": "^Tilix$"
@@ -89,14 +71,8 @@
             "border": "pixel",
             "current_border_width": 0,
             "floating": "auto_off",
-            "geometry": {
-               "height": 482,
-               "width": 642,
-               "x": 0,
-               "y": 0
-            },
             "name": "Tilix: myles-ubuntu",
-            "percent": 0.7,
+            "percent": 0.717044733044733,
             "swallows": [
                {
                 "class": "^Tilix$"
@@ -112,19 +88,13 @@
     "border": "normal",
     "floating": "auto_off",
     "layout": "splitv",
-    "percent": 0.383333333333333,
+    "percent": 0.3694816053511705,
     "type": "con",
     "nodes": [
         {
             "border": "pixel",
             "current_border_width": 0,
             "floating": "auto_off",
-            "geometry": {
-               "height": 482,
-               "width": 642,
-               "x": 0,
-               "y": 0
-            },
             "name": "Tilix: myles-ubuntu",
             "percent": 0.5,
             "swallows": [
@@ -138,12 +108,6 @@
             "border": "pixel",
             "current_border_width": 0,
             "floating": "auto_off",
-            "geometry": {
-               "height": 482,
-               "width": 642,
-               "x": 0,
-               "y": 0
-            },
             "name": "Tilix: myles-ubuntu",
             "percent": 0.5,
             "swallows": [

@@ -2,6 +2,7 @@
 
 # Make folders
 mkdir ~/Programs
+mkdir ~/scripts
 
 # Nvidia Drivers and Update
 sudo apt-get purge nvidia*
@@ -10,24 +11,24 @@ sudo apt-get update
 sudo apt install nvidia-390
 
 # Install programs
-sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip thunderbird
+sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip dunst
 
 # Install utilities
 sudo apt-get install colordiff curl
 
 # Install snaps
-sudo snap install spotify
+sudo snap install spotify discord mailspring
 
-# Install Python2 libraries
-pip install appdirs asn1crypto astroid backports.functools-lru-cache beautifulsoup4 certifi chardet configparser cryptography decorator enum34 epc eventlet flake8 fudge funcsigs future futures fuzzywuzzy gmusicapi gpsoauth greenlet httplib2 idna importmagic ipaddress isort keyring keyrings.alt lazy-object-proxy logilab-common lxml mccabe MechanicalSoup mock mutagen netifaces oauth2client pafy pbr pip PlexAPI proboscis protobuf pyasn1 pyasn1-modules pycairo PyChromecast pycodestyle pycountry pycrypto pycryptodomex pyflakes pygobject pylint python-dateutil pyxdg ranger requests rsa SecretStorage setuptools sexpdata simplejson singledispatch six soundcloud spotipy titlecase tizchromecastproxy tizdirbleproxy tizgmusicproxy tizplexproxy tizsoundcloudproxy tizspotifyproxy tizyoutubeproxy tqdm urllib3 validictory websocket-client wheel wrapt yapf youtube-dl zeroconf
+# Python 2 Libraries
+pip install ansible apache-libcloud asn1crypto certifi chardet Cheetah cryptography enum34 funcsigs httplib2 idna ipaddress Jinja2 jmespath keyring keyrings.alt lockfile MarkupSafe mock netaddr paramiko pbr pip pyasn1 pycrypto pycurl pygobject pykerberos pyOpenSSL pyxdg PyYAML ranger requests SecretStorage setuptools simplejson six spectacle urlgrabber urllib3 wheel xmltodict
 
-# Install Python3 libraries
-pip3 install apturl asn1crypto astroid Brlapi certifi chardet command-not-found cryptography cupshelpers cycler defer distro-info docopt epc flake8 httplib2 idna imageio importmagic isort keyring keyrings.alt kiwisolver language-selector launchpadlib lazr.restfulclient lazr.uri lazy-object-proxy logilab-common louis macaroonbakery Mako MarkupSafe matplotlib mccabe meson numpy oauth olefile onboard pexpect Pillow pip protobuf pycairo pycodestyle pycrypto pycups pyflakes pygobject pylint pymacaroons PyNaCl pyparsing pyRFC3339 python-apt python-dateutil python-debian pytz pyxdg PyYAML reportlab requests requests-unixsocket scipy screen-resolution-extra SecretStorage setuptools sexpdata simplejson six system-service systemd-python ubuntu-drivers-common ufw unattended-upgrades urllib3 usb-creator wadllib wheel wrapt xdiagnose xkit yapf zope.interface
+# Python 3 Libraries
+pip install apt-xapian-index apturl asn1crypto Brlapi certifi chardet command-not-found cryptography cupshelpers defer distro-info httplib2 idna keyring keyrings.alt language-selector launchpadlib lazr.restfulclient lazr.uri louis macaroonbakery Mako MarkupSafe oauth olefile pexpect Pillow pip protobuf pycairo pycrypto pycups pygobject pymacaroons PyNaCl PyQt5 PyQt5-sip pyRFC3339 python-apt python-debian pytz pyxdg PyYAML reportlab requests requests-unixsocket ruamel.yaml screen-resolution-extra SecretStorage setuptools simplejson six system-service systemd-python ubuntu-drivers-common ufw unattended-upgrades urllib3 usb-creator wadllib wheel whither xkit zope.interface
 
 # i3-gaps dependencies
 sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
 
-# non-critical i3-gaps dependencies (scripts and stuff)
+# Non-critical i3-gaps dependencies (scripts and stuff)
 sudo apt-get install feh dmenu kde-spectacle wmctrl
 
 # Install i3-gaps
@@ -38,7 +39,7 @@ autoreconf --force --install
 rm -rf build/
 mkdir -p build && cd build/
 ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-make -j8
+make -j6
 sudo make install
 cd ~/
 
@@ -63,38 +64,54 @@ sudo make install
 cd ~/
 
 # Bash setup
-sudo cp ~/dotfiles/work/bashrc ~/.bashrc
-sudo cp ~/dotfiles/work/bash_aliases ~/.bash_aliases
+sudo cp ~/dotfiles/home/bashrc ~/.bashrc
+sudo cp ~/dotfiles/home/bash_aliases ~/.bash_aliases
 source ~/.bashrc
 
 # i3-gaps setup
-mkdir ~/.config/i3/
-sudo cp ~/dotfiles/work/i3/config ~/.config/i3/config
-sudo cp ~/dotfiles/work/i3/exit_menu.sh ~/.config/i3/
+mkdir ~/.config/i3/layouts
+sudo cp ~/dotfiles/home/i3/config ~/.config/i3/config
+sudo cp ~/dotfiles/home/i3/layouts/* ~/.config/i3/layouts/
 
 # i3-blocks setup
-sudo cp ~/dotfiles/work/i3blocks/i3blocks.conf ~/.i3blocks.conf
+sudo cp ~/dotfiles/home/i3blocks/i3blocks.conf ~/.i3blocks.conf
 shopt -s extglob
-sudo cp ~/dotfiles/work/i3blocks/!(*.conf) /usr/local/libexec/i3blocks/
+sudo cp ~/dotfiles/home/i3blocks/!(*.conf) /usr/local/libexec/i3blocks/
 shopt -u extglob
 
 # Compton setup
-sudo cp ~/dotfiles/work/compton/compton.conf ~/.config/compton.conf
+sudo cp ~/dotfiles/home/compton/compton.conf ~/.config/compton.conf
+
+# Dunst setup
+mkdir ~/.config/dunst/
+sudo cp ~/dotfiles/home/dunst/dunstrc ~/.config/dunst/
 
 # Tilix setup
 sudo mkdir -p ~/.config/tilix/schemes/
-sudo cp ~/dotfiles/work/tilix/themes/nord.json ~/.config/tilix/schemes/
-dconf load /com/gexperts/Tilix/ < ~/dotfiles/work/tilix/tilix.dconf
+sudo cp ~/dotfiles/home/tilix/themes/nord.json ~/.config/tilix/schemes/
+dconf load /com/gexperts/Tilix/ < ~/dotfiles/home/tilix/tilix.dconf
 sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
 
 # Ranger setup
 ranger --copy-config=all
-sudo cp ~/dotfiles/work/ranger/rc.conf ~/.config/ranger/
+sudo cp ~/dotfiles/home/ranger/rc.conf ~/.config/ranger/
+
+# Rofi setup
+mkdir ~/.config/rofi/
+sudo cp ~/dotfiles/home/rofi/* ~/.config/rofi/
 
 # Spacemacs setup
 sudo rm -r ~/.emacs.d/
 git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-sudo cp ~/dotfiles/work/spacemacs/spacemacs ~/.spacemacs
+sudo cp ~/dotfiles/home/spacemacs/spacemacs ~/.spacemacs
+
+# Other setup
+# Scripts
+sudo cp ~/dotfiles/home/scripts/* ~/scripts/
+# Gotop
+git clone --depth 1 https://github.com/cjbassi/gotop /tmp/gotop
+/tmp/gotop/scripts/download.sh
+mv gotop /usr/local/bin
 
 # Fonts setup
 cd ~/Downloads/
@@ -120,7 +137,7 @@ cd ~/
 
 # Wallpaper setup
 mkdir ~/Documents/wallpapers/
-sudo cp ~/dotfiles/work/wallpaper.jpg ~/Documents/wallpapers/
+sudo cp ~/dotfiles/home/wallpaper.jpg ~/Documents/wallpapers/
 
 bool=0
 while [[ $bool == 0 ]]; do
