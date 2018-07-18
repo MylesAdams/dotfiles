@@ -257,16 +257,13 @@ bar {
 ###########################
 
 # Startup Execution
-exec --no-startup-id chromium-browser
-exec --no-startup-id thunderbird
-exec --no-startup-id spotify
-#exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
-#exec --no-startup-id i3-msg 'workspace $workspace3; exec --no-startup-id tilix'
-exec --no-startup-id compton
-exec --no-startup-id redshift
-exec_always --no-startup-id emacs --daemon
 exec --no-startup-id xrandr --output DP-1 --right-of DVI-I-1
 exec_always --no-startup-id feh --bg-scale /home/myles/Documents/wallpapers/wallpaper.jpg
+exec --no-startup-id compton
+exec --no-startup-id redshift
+exec --no-startup-id setxkbmap -option caps:swapescape
+exec_always --no-startup-id emacs --daemon
+exec --no-startup-id /home/myles/scripts/i3_startup.sh
 
 # workspace windows
 assign [class="Spotify"] $workspace1
@@ -276,12 +273,8 @@ assign [class="Thunderbird"] $workspace10
 
 for_window [class="Spotify"] move to workspace $workspace1
 
-# Startup scripts
-exec --no-startup-id setxkbmap -option caps:swapescape
-exec --no-startup-id /home/myles/scripts/i3_startup.sh
-
 # Custom Script keybinds
-bindsym $mod+Ctrl+l exec fancylock
+bindsym $mod+Ctrl+l exec gnome-screensaver-command --activate
 bindsym $mod+Ctrl+v workspace $workspace4; exec --no-startup-id zathura ~/Documents/Coding/Vim-Cheat-Sheet.pdf
 bindsym $mod+Shift+e exec --no-startup-id emacsclient -c
 bindsym $mod+Shift+i exec --no-startup-id chromium-browser

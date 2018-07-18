@@ -10,7 +10,7 @@ sudo apt-get update
 sudo apt install nvidia-396
 
 # Install programs
-sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip thunderbird 
+sudo apt-get install chromium-browser ranger emacs compton tilix rofi python3 python3-pip python-pip zip unzip thunderbird
 
 # Install utilities
 sudo apt-get install colordiff curl
@@ -28,7 +28,7 @@ pip3 install apturl asn1crypto astroid Brlapi certifi chardet command-not-found 
 sudo apt-get install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm0 libxcb-xrm-dev automake
 
 # non-critical i3-gaps dependencies (scripts and stuff)
-sudo apt-get install feh dmenu kde-spectacle wmctrl
+sudo apt-get install feh dmenu kde-spectacle wmctrl gnome-screensaver
 
 # Install i3-gaps
 cd ~/Programs/
@@ -44,6 +44,12 @@ cd ~/
 
 # i3blocks script dependencies
 sudo apt-get install lm-sensors alsa-base pulseaudio sysstat acpi
+
+# Setting up scripts & layouts for i3
+mkdir ~/scripts
+mkdir ~/.config/i3/layouts
+sudo cp ~/dotfiles/work/i3/scripts/* ~/scripts
+sudo cp ~/dotfiles/work/i3/layouts/* ~/.config/i3/layouts/
 
 # Settings up sensors for i3blocks
 sudo sensors-detect
@@ -90,6 +96,10 @@ sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
 # Ranger setup
 ranger --copy-config=all
 sudo cp ~/dotfiles/work/ranger/rc.conf ~/.config/ranger/
+
+# Rofi setup
+mkdir ~/.config/rofi
+sudo cp ~/dotfiles/work/rofi/* ~/.config/rofi
 
 # Spacemacs setup
 sudo rm -r ~/.emacs.d/

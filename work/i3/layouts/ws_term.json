@@ -30,17 +30,11 @@
             "border": "pixel",
             "current_border_width": 0,
             "floating": "auto_off",
-            "geometry": {
-               "height": 482,
-               "width": 642,
-               "x": 0,
-               "y": 0
-            },
-            "name": "Tilix: Default",
+            "name": "notes.org",
             "percent": 0.600990099009901,
             "swallows": [
                {
-                "class": "^Tilix$"
+                "class": "^Emacs$"
                }
             ],
             "type": "con"

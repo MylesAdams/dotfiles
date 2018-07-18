@@ -30,7 +30,8 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(javascript
+   '(yaml
+     javascript
      (python :variables python-enable-yapf-format-on-save t) 
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -129,7 +130,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(doom-one doom-city-lights spacemacs-dark
                          spacemacs-light)
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -327,7 +328,7 @@ you should place your code here."
 
   ;; Set theme
   (use-package doom-themes
-    :init (load-theme 'doom-city-lights t))
+    :init (load-theme 'doom-one t))
 
 
   (package-install 'spaceline-all-the-icons)
@@ -340,6 +341,19 @@ you should place your code here."
 
   ;; Set neotree theme
   (setq neo-theme 'icons)
+
+  ;; ORG-MODE stuff
+  (setq org-hide-emphasis-markers t)
+  (setq org-todo-keywords
+        '((sequence "TODO:" "IN-PROGRESS:" "WAITING:" "DONE:" "BLOCKED:" "CANCELED:")))
+  (setq org-todo-keyword-faces
+        '(("IN-PROGRESS:" . "orange") ("WAITING:" . "magenta") ("CANCELED:" . "gray") ("BLOCKED:" . "red") ("DONE:" . "green"))
+        )
+  (add-hook 'org-mode-hook 'visual-line-mode)
+  (add-hook 'org-mode-hook 'org-indent-mode)
+
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (evil-leader/set-key "o a" 'org-agenda)
 
   ;;(setq evil-insert-state-cursor '((box) "green"))
 
@@ -447,9 +461,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
+ '(org-agenda-files (quote ("~/workspace/notes.org")))
  '(package-selected-packages
    (quote
-    (xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help spaceline-all-the-icons powerline spinner hydra parent-mode projectile pkg-info epl flx smartparens iedit anzu evil goto-chg undo-tree highlight bind-map bind-key packed f dash s helm avy helm-core async popup dash-functional anaconda-mode pythonic doom-city-lights-theme all-the-icons memoize pos-tip flycheck company yasnippet auto-complete exec-path-from-shell yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lua-mode lorem-ipsum live-py-mode linum-relative link-hint indent-guide hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump doom-themes diminish define-word cython-mode company-statistics company-anaconda column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (yaml-mode spaceline-all-the-icons powerline spinner hydra parent-mode projectile pkg-info epl flx smartparens iedit anzu evil goto-chg undo-tree highlight bind-map bind-key packed f dash s helm avy helm-core async popup dash-functional anaconda-mode pythonic doom-city-lights-theme all-the-icons memoize pos-tip flycheck company yasnippet auto-complete exec-path-from-shell yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pip-requirements persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lua-mode lorem-ipsum live-py-mode linum-relative link-hint indent-guide hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio fuzzy flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump doom-themes diminish define-word cython-mode company-statistics company-anaconda column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
