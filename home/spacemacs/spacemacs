@@ -330,7 +330,7 @@ you should place your code here."
 
   ;; Set theme
   (use-package doom-themes
-    :init (load-theme 'doom-city-lights t))
+    :init (load-theme 'doom-one t))
 
 
   (package-install 'spaceline-all-the-icons)
