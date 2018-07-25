@@ -1,5 +1,5 @@
 workspace() {
-    cd ~/Documents/workspace/$1
+    cd ~/workspace/$1
 }
 
 emacsclient_func() {
@@ -25,6 +25,9 @@ alias ga='git add'
 alias gc='git commit -m'
 alias gps='git push'
 alias gpl='git pull'
+
+# Build
+alias bldair='cmake -DCMAKE_BUILD_TYPE=debug -Dtul_DIR=~/Toyon/lib/tul-2.0 -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..'
 
 # Useful changes to commands
 alias cp='cp -r'
