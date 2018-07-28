@@ -28,6 +28,7 @@ alias gpl='git pull'
 
 # Build
 alias bldair='cmake -DCMAKE_BUILD_TYPE=debug -Dtul_DIR=~/Toyon/lib/tul-2.0 -DCMAKE_EXPORT_COMPILE_COMMANDS=1 ..'
+alias fcc='find . | ag clang_complete | xargs cat | sort | uniq'
 
 # Useful changes to commands
 alias cp='cp -r'
@@ -42,5 +43,5 @@ alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
-alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
+#alias gnome-control-center='env XDG_CURRENT_DESKTOP=GNOME gnome-control-center'
 alias spotify='spotify --disable-gpu'

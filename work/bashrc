@@ -120,3 +120,4 @@ fi
 export EDITOR="emacsclient -t"
 export ALTERNATE_EDITOR=""
 export NO_AT_BRIDGE=1
+export HOME="/home/myles"
