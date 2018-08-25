@@ -2,24 +2,12 @@ function workspace() {
     cd ~/Documents/Workspace/$1
 }
 
-function emacs_func() {
-    emacs $1 &
-}
-
-function sudo_emacs_func() {
-    sudo emacs $1 &
-}
-
 function emacsclient_func() {
     emacsclient -c $1 &
 }
 
 # Emacs
-alias em='emacs_func'
 alias e='emacsclient_func'
-alias enw='emacsclient -t'
-alias se='sudo_emacs_func'
-alias senw='sudo emacs -nw'
 
 # Programs
 alias r='ranger'
@@ -44,6 +32,9 @@ alias gpl='git pull'
 # Build/make/cmake
 alias cmake-qt-debug='cmake ../ -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt/5.10.1 -DCMAKE_BUILD_TYPE=debug'
 alias cmake-qt-release='cmake ../ -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt/5.10.1 -DCMAKE_BUILD_TYPE=release'
+alias cmake-ec='cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1'
+alias ccmake='CC=gcc CXX=g++ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1'
+alias fcc='find . | ag clang_complete | xargs cat | sort | uniq'
 
 # Useful changes to commands
 alias cp='cp -r'
@@ -59,6 +50,3 @@ alias .2='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
-
-# Old, not sure if useful
-alias activate_tf='cd ~/Documents/Workspace/tensorflow; source ./bin/activate'

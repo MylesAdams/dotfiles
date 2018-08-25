@@ -14,7 +14,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="~/Downloads/google-cloud-sdk/platform/google_appengine:~/Downloads/google-cloud-sdk/bin/:~/Downloads/google-cloud-sdk/platform/google_appengine/google/appengine:~/Downloads/flashwords2-720f9b82a974.json:/System/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/opt/llvm/bin:/usr/local/bin:/usr/local/opt/openssl/bin:/usr/bin:$PATH"
 
 export PYTHONPATH="$PYTHONPATH:/usr/local/lib/python3.6/site-packages/tensorflow/models/research/:/usr/local/lib/python3.6/site-packages/tensorflow/models/research/slim:~/Downloads/google-cloud-sdk/bin:~/Downloads/google-cloud-sdk/platform/google_appengine:~/Downloads/google-cloud-sdk/platform/google_appengine/google/appengine"
 
