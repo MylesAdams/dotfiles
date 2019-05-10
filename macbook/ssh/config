@@ -1,0 +1,33 @@
+Host droplet
+     HostName 206.189.162.148
+     ServerAliveInterval 240
+     User myles
+
+Host abc-drop
+     HostName 206.189.223.161
+     ServerAliveInterval 240
+     User myles
+
+Host csil
+     HostName csil-36.cs.ucsb.edu
+     ServerAliveInterval 240
+     User mylesadams
+
+Host comet
+     HostName comet.sdsc.xsede.org
+     User myles
+
+Host csil38
+     HostName csil-38.cs.ucsb.edu
+     User gavinfrazar
+     IdentityFile /Users/mylesadams/.ssh/id_rsa
+
+Host gavin
+     HostName localhost
+     User gavin
+     ProxyJump csil38
+     Port 10000
+
+Host vlab
+     HostName drum.cs.ucsb.edu
+     User myles

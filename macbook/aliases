@@ -6,11 +6,39 @@ function emacsclient_func() {
     emacsclient -c $1 &
 }
 
+function clang_cmake_and_rc()
+{
+    CC=clang CXX=clang++ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 $@
+    rc -J .
+}
+
+function g++_cmake_and_rc()
+{
+    CC=gcc CXX=g++ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 $@
+    rc -J .
+}
+
+function use()
+{
+  case "$1" in
+    py2)
+      pyenv global 2.7.15
+      ;;
+    py3)
+      pyenv global 3.7.2
+      ;;
+    *)
+      echo "Usage: $0 {py2|py3}"
+      ;;
+  esac
+}
+
 # Emacs
 alias e='emacsclient_func'
 
 # Programs
 alias r='ranger'
+alias py='python'
 
 # Directory movement
 alias ws='workspace'
@@ -18,9 +46,10 @@ alias ucsb='cd ~/Documents/UCSB'
 alias apollo='cd ~/Documents/Workspace/ApolloTradingBot'
 
 # SSH
-alias droplet="ssh myles@206.189.162.148"
-alias server48='ssh ubuntu@169.231.234.242'
-alias csil='ssh mylesadams@csil-36.cs.ucsb.edu'
+# alias droplet="ssh myles@206.189.162.148"
+# alias server48='ssh ubuntu@169.231.234.242'
+# alias csil='ssh mylesadams@csil-36.cs.ucsb.edu'
+# alias 177vm='ssh myles_adams@192.35.222.247'
 
 # Git
 alias gs='git status'
@@ -29,11 +58,17 @@ alias gc='git commit -m'
 alias gps='git push'
 alias gpl='git pull'
 
+# Python
+alias mypy='mypy --ignore-missing-imports'
+
 # Build/make/cmake
 alias cmake-qt-debug='cmake ../ -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt/5.10.1 -DCMAKE_BUILD_TYPE=debug'
 alias cmake-qt-release='cmake ../ -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt/5.10.1 -DCMAKE_BUILD_TYPE=release'
 alias cmake-ec='cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1'
-alias ccmake='CC=gcc CXX=g++ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1'
+alias gcmake='CC=gcc CXX=g++ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1'
+alias ccmake='CC=clang CXX=clang++ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1'
+alias crc='clang_cmake_and_rc'
+alias grc='g++_cmake_and_rc'
 alias fcc='find . | ag clang_complete | xargs cat | sort | uniq'
 
 # Useful changes to commands

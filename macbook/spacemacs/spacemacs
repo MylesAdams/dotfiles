@@ -1,4 +1,4 @@
-;; -*- mode: emacs-lisp -*-
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -33,12 +33,17 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(ruby
+     ipython-notebook
+     html
+     java
+     command-log
+     latex
      (scala :variables scala-auto-start-ensime t)
      yaml
      javascript
      (c-c++ :variables c-c++-enable-clang-support t)
-     (python :variables python-enable-yapf-format-on-save t) 
+     (python :variables python-enable-yapf-format-on-save t)
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -50,6 +55,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      ;; git
      markdown
+     multiple-cursors
      org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -59,6 +65,7 @@ This function should only modify configuration layer settings."
      ;; version-control
      (shell :variables shell-default-shell 'eshell)
      semantic
+     (latex :variables latex-build-command "LatexMk")
      )
 
    ;; List of additional packages that will be installed without being
@@ -68,7 +75,23 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(doom-themes all-the-icons irony flycheck-irony company-irony rtags cmake-mode bash-completion)
+   dotspacemacs-additional-packages '(
+                                      doom-themes
+                                      all-the-icons
+                                      irony
+                                      flycheck-irony
+                                      company-irony
+                                      rtags
+                                      cmake-mode
+                                      bash-completion
+                                      beacon
+                                      bury-successful-compilation
+                                      resize-window
+                                      bison-mode
+                                      auctex
+                                      auctex-latexmk
+                                      company-auctex
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -195,11 +218,11 @@ It should only modify the values of Spacemacs settings."
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
-   ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
-   ;; are spaceline themes. `vanilla' is default Emacs mode-line. `custom' is a
-   ;; user defined themes, refer to the DOCUMENTATION.org for more info on how
-   ;; to create your own spaceline theme. Value can be a symbol or list with\
-   ;; additional properties.
+   ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
+   ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
+   ;; `vanilla' is default Emacs mode-line. `custom' is a user defined themes,
+   ;; refer to the DOCUMENTATION.org for more info on how to create your own
+   ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
    dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.1)
 
@@ -210,7 +233,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Iosevka Term"
-                               :size 13
+                               :size 18
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -274,10 +297,10 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
 
-   ;; If non-nil, the paste transient-state is enabled. While enabled, pressing
-   ;; `p' several times cycles through the elements in the `kill-ring'.
-   ;; (default nil)
-   dotspacemacs-enable-paste-transient-state nil
+   ;; If non-nil, the paste transient-state is enabled. While enabled, after you
+   ;; paste something, pressing `C-j' and `C-k' several times cycles through the
+   ;; elements in the `kill-ring'. (default nil)
+   dotspacemacs-enable-paste-transient-state t
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
@@ -410,7 +433,7 @@ It should only modify the values of Spacemacs settings."
    ;; %z - mnemonics of buffer, terminal, and keyboard coding systems
    ;; %Z - like %z, but including the end-of-line format
    ;; (default "%I@%S")
-   dotspacemacs-frame-title-format "%I@%S"
+   dotspacemacs-frame-title-format ""
 
    ;; Format specification for setting the icon title format
    ;; (default nil - same as frame-title-format)
@@ -446,6 +469,13 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+
+  (add-to-list 'default-frame-alist
+               '(ns-transparent-titlebar . t))
+
+  (add-to-list 'default-frame-alist
+               '(ns-appearance . dark)) ;; or dark - depending on your theme
+
   )
 
 (defun dotspacemacs/user-load ()
@@ -463,14 +493,15 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  ;;(push "~/.emacs.d/custom/" load-path)
+  ;; (setq spacemacs-buffer--warnings nil)
+
   (add-to-list 'load-path (expand-file-name "~/.emacs.d/custom"))
 
   ;; Set theme
   (use-package doom-themes
     :init (load-theme 'doom-one t))
 
-  (menu-bar-mode -1)
+  (menu-bar-mode 1)
 
   (require 'bash-completion)
   (bash-completion-setup)
@@ -480,6 +511,17 @@ you should place your code here."
   (setq whitespace-style '(face lines-tail))
   (add-hook 'prog-mode-hook 'whitespace-mode)
 
+  (beacon-mode 1)
+
+  ;; LaTeX
+  ;; (auctex-latexmk-setup)
+  (company-auctex-init)
+  (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  ;; (ad-deactivate 'doc-view-toggle-display)
+
+
+
   ;; ORG-MODE stuff
   (setq org-hide-emphasis-markers t)
   (setq org-todo-keywords
@@ -488,11 +530,25 @@ you should place your code here."
   (setq org-todo-keyword-faces
         '(("IN-PROGRESS:" . "orange") ("WAITING:" . "magenta") ("CANCELED:" . "gray") ("BLOCKED:" . "red") ("DONE:" . "green"))
         )
+
+
+  (with-eval-after-load 'org
+    (customize-set-value 'org-latex-with-hyperref nil)
+    (add-to-list 'org-latex-default-packages-alist "\\PassOptionsToPackage{hyphens}{url}")
+    )
+
+
+  ;; (add-to-list 'org-latex-default-packages-alist "\\PassOptionsToPackage{hidelinks}{hyperref}")
+
+
   (add-hook 'org-mode-hook 'visual-line-mode)
   (add-hook 'org-mode-hook 'org-indent-mode)
 
   (global-set-key (kbd "C-c a") 'org-agenda)
   (evil-leader/set-key "o a" 'org-agenda)
+
+  ;; (evil-leader/set-key "o z" (lambda (a s v b) (interactive)
+	;; 	                             (org-open-file (org-koma-letter-export-to-pdf nil s v b))))
 
   (defcustom imenu-list-size 0.2
     "Size (height or width) for the imenu-list buffer.
@@ -506,11 +562,31 @@ Either a positive integer (number of rows/columns) or a percentage."
                                  (setq python-indent 4)))
   (setq python-shell-completion-native-enable nil)
 
+  (pyenv-mode-set "3.7.2")
+
+  ;; (with-eval-after-load 'flycheck
+  ;;   (add-hook 'flycheck-mode-hook #'flycheck-setup))
 
   (setq semantic-inhibit-functions
         (list (lambda () (not (and (featurep 'cc-defs)
                                    c-buffer-is-cc-mode)))))
 
+  (setq-default sp-escape-quotes-after-insert nil)
+
+  (evil-leader/set-key "o r" 'resize-window)
+
+
+  ;;####################### JAVA ######################
+  (require 'meghanada)
+  (add-hook 'java-mode-hook
+            (lambda ()
+              ;; meghanada-mode on
+              (meghanada-mode t)
+              (flycheck-mode +1)
+              (setq c-basic-offset 2)
+              ;; use code format
+              (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+  ;;####################### JAVA ######################
 
 
   ;; Set style for C/C++ to google style
@@ -531,6 +607,9 @@ Either a positive integer (number of rows/columns) or a percentage."
   (unless (display-graphic-p)
     (setq linum-relative-format "%3s "))
 
+  (setq-default linum-format "%4d ")
+  (setq linum-format "%4d \u2502 ")
+
   ;; System settings
   (set-frame-parameter (selected-frame) 'alpha '(95 . 95))
   ;;(add-to-list 'default-frame-alist '(alpha . '(95 . 95)))
@@ -549,8 +628,6 @@ Either a positive integer (number of rows/columns) or a percentage."
       (if (region-active-p)
           (progn
             (shell-command-on-region (region-beginning) (region-end) "xsel -i -b")
-
-
             (message "Yanked region to clipboard!")
             (deactivate-mark))
         (message "No region active; can't yank to clipboard!")))
@@ -565,11 +642,13 @@ Either a positive integer (number of rows/columns) or a percentage."
           (clipboard-yank)
           (message "graphics active")
           )
-
       (insert (shell-command-to-string "xsel -o -b"))
       )
-
     )
+
+  ;; Python company
+  (eval-after-load 'company
+    '(add-to-list 'company-backends `company-anaconda))
 
   ;; Scrolling on touchpad
   (unless window-system
@@ -595,13 +674,123 @@ Either a positive integer (number of rows/columns) or a percentage."
   (evil-leader/set-key "o h" 'split-window-horizontally)
   (evil-leader/set-key "o v" 'split-window-vertically)
 
-  ;; Replacement escape key 'jk' or 'kj'
-  (setq-default
-   evil-escape-key-sequence "jk"
-   evil-escape-unordered-key-sequence "true"
-   )
+  ;; Find file in current directory tree
+  (evil-leader/set-key "o f" 'counsel-file-jump)
+
+  (evil-leader/set-key "o 0" 'eyebrowse-switch-to-window-config-0)
+  (evil-leader/set-key "o 1" 'eyebrowse-switch-to-window-config-1)
+  (evil-leader/set-key "o 2" 'eyebrowse-switch-to-window-config-2)
+  (evil-leader/set-key "o 3" 'eyebrowse-switch-to-window-config-3)
+  (evil-leader/set-key "o 4" 'eyebrowse-switch-to-window-config-4)
+  (evil-leader/set-key "o 5" 'eyebrowse-switch-to-window-config-5)
+  (evil-leader/set-key "o 6" 'eyebrowse-switch-to-window-config-6)
+  (evil-leader/set-key "o 7" 'eyebrowse-switch-to-window-config-7)
+  (evil-leader/set-key "o 8" 'eyebrowse-switch-to-window-config-8)
+  (evil-leader/set-key "o 9" 'eyebrowse-switch-to-window-config-9)
+
+  (set-fringe-style '(nil . 0))
+
+  ;; Subtract 12 from these for 4 pixel amount always added plus 8 for left fringe
+  (defun window-resize-left ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen 'maximized)
+    (set-frame-parameter nil 'fullscreen nil)
+    (set-frame-width (selected-frame) (- (/ (display-pixel-width) 2) 12) nil t)
+    (set-frame-position (selected-frame) 0  0)
+    )
+
+  ;; Subtract 12 from these for 4 pixel amount always added plus 8 for left fringe
+  (defun window-resize-right ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen 'maximized)
+    (set-frame-parameter nil 'fullscreen nil)
+    (set-frame-width (selected-frame) (- (/ (display-pixel-width) 2) 12) nil t)
+    (set-frame-position (selected-frame) (/ (display-pixel-width) 2)  0)
+    )
+
+  (defun window-resize-full ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen 'maximized)
+    ;; (set-frame-width (selected-frame) (- (display-pixel-width) 12) nil t)
+    ;; (set-frame-position (selected-frame) 0 0)
+    )
+
+  (evil-leader/set-key "o w r" 'window-resize-right)
+  (evil-leader/set-key "o w l" 'window-resize-left)
+  (evil-leader/set-key "o w f" 'window-resize-full)
+
+  (require 'helm)
+
+  (defun find-files-at-directory (directory)
+    (interactive)
+    (helm-find-files-1 directory))
+
+  (defhydra hydra-directory (:color blue)
+    "
+-----------------  --------------------------------------
+| [_C_] Classes   |  |  [_c_] C             Javascript [_J_]  |
+| [_D_] Documents |  |  [_+_] C++               MATLAB [_m_]  |
+| [_P_] Projects  |  |  [_._] Dotfiles          Python [_p_]  |
+| [_W_] Workspace |  |  [_j_] Java               Scala [_s_]  |
+-----------------  --------------------------------------
+"
+    ("D" (helm-find-files-1 "/Users/mylesadams/Documents/") nil)
+    ("W" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/") nil)
+    ("c" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/C/") nil)
+    ("+" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/C++/") nil)
+    ("p" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Python/") nil)
+    ("s" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Scala/") nil)
+    ("J" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Javascript/") nil)
+    ("j" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Java/") nil)
+    ("." (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Dotfiles/") nil)
+    ("m" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/MATLAB/") nil)
+    ("C" (hydra-classes/body) nil)
+    ("P" (hydra-projects/body) nil)
+    )
+
+  (defhydra hydra-classes (:color blue)
+    "
+-----------------------------------
+| [_a_] CS 111          CS 162  [_g_]
+| [_b_] CS 130A         CS 165B [_h_] |
+| [c] CS 130B         CS 170  [_i_] |
+| [_d_] CS 140          CS 176A [_j_] |
+| [_e_] CS 154          CS 177  [_k_] |
+| [_f_] CS 160          CS 181  [_l_] |
+-----------------------------------
+"
+    ("a" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/MATLAB/CS111/") nil)
+    ("b" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/C++/CS130A/") nil)
+    ("d" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/C/CS140/") nil)
+    ("e" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/MIPS/CS154/") nil)
+    ("f" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/C++/CS160/") nil)
+    ("g" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Scala/CS162/") nil)
+    ("h" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Python/CS165B/") nil)
+    ("i" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/C++/CS170/") nil)
+    ("j" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/C/CS176A/") nil)
+    ("k" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Python/CS177/") nil)
+    ("l" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Python/CS181/") nil)
+    )
+
+  (defhydra hydra-projects (:color blue)
+    "
+--------------------------
+| [_a_] ABC Webapp         |
+| [_b_] Apollo Trading Bot |
+| [_c_] Resume             |
+--------------------------
+"
+    ("a" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Python/abc_webapp/") nil)
+    ("b" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/ApolloTradingBot/") nil)
+    ("c" (helm-find-files-1 "/Users/mylesadams/Documents/Workspace/Resume/") nil)
+    )
+
+  (global-set-key (kbd "M-d") 'hydra-directory/body)
+
 
   (setq-default helm-make-build-dir "build")
+
+  (bury-successful-compilation 1)
 
   ;; Add Irony mode to c-modes
   (add-hook 'c++-mode-hook 'irony-mode)
@@ -612,8 +801,13 @@ Either a positive integer (number of rows/columns) or a percentage."
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
   ;; Add irony-backend to Company
+  ;; Load with `irony-mode` as a grouped backend
   (eval-after-load 'company
-    '(add-to-list 'company-backends 'company-irony))
+    '(add-to-list 'company-backends `company-irony))
+
+  (setq-default flycheck-c/c++-clang-executable "/usr/local/opt/llvm/bin/clang")
+  (setq-default flycheck-clang-standard-library "libc++")
+  (setq-default flycheck-clang-language-standard "c++17")
 
   ;;(unbind-key (kbd "M-.") evil-normal-state-map)
   (define-key evil-normal-state-map (kbd "M-.") 'nil)
@@ -646,7 +840,29 @@ Either a positive integer (number of rows/columns) or a percentage."
        (define-key company-active-map (kbd "C-j") 'company-select-next)
        (define-key company-active-map (kbd "C-h") 'company-previous-page)
        (define-key company-active-map (kbd "C-l") 'company-next-page)
+
+       (define-key company-template-nav-map [tab] 'nil)
+       (define-key company-template-nav-map (kbd "TAB") 'nil)
+       (define-key company-template-nav-map (kbd "C-l") 'company-template-forward-field)
        ))
+
+  (use-package yasnippet
+    :ensure t
+    :diminish yas-minor-mode
+    :config (yas-global-mode 1)
+    :commands (yas-next-field-or-maybe-expand yas-prev-field)
+    :config (progn
+            (yas-global-mode 1)
+            ;; can't seem to use :bind as yas-keymap is not known yet..? so use
+            ;; define-key instead
+            ;; unbind tab so can be used for company-tng
+            (define-key yas-keymap [(tab)]       nil)
+            (define-key yas-keymap (kbd "TAB")   nil)
+            (define-key yas-keymap [(shift tab)] nil)
+            (define-key yas-keymap [backtab]     nil)
+            ;; and instead use C-f / C-b (forward / backwards) instead
+            (define-key yas-keymap (kbd "C-l") #'yas-next-field-or-maybe-expand)
+            (define-key yas-keymap (kbd "C-h") #'yas-prev-field)))
 
 
   (define-key c-mode-map (kbd "M-RET") 'srefactor-refactor-at-point)
@@ -655,7 +871,6 @@ Either a positive integer (number of rows/columns) or a percentage."
   (global-set-key (kbd "M-RET m") 'srefactor-lisp-format-sexp)
   (global-set-key (kbd "M-RET d") 'srefactor-lisp-format-defun)
   (global-set-key (kbd "M-RET b") 'srefactor-lisp-format-buffer)
-
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -670,15 +885,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-want-Y-yank-to-eol nil)
- '(flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml")
- '(global-semantic-stickyfunc-mode nil)
  '(package-selected-packages
    (quote
-    (bash-completion noflet mvn meghanada maven-test-mode groovy-mode groovy-imports pcache gradle-mode ensime sbt-mode scala-mode company-emacs-eclim eclim cmake-mode ac-ispell yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum web-beautify volatile-highlights vi-tilde-fringe uuidgen toc-org symon string-inflection spaceline-all-the-icons spaceline powerline shell-pop restart-emacs request rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pippel pipenv pip-requirements persp-mode password-generator paradox spinner overseer org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-bullets org-brain open-junk-file neotree nameless multi-term move-text mmm-mode markdown-toc markdown-mode macrostep lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode link-hint json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide importmagic epc ctable concurrent deferred hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio gnuplot gh-md fuzzy flycheck-rtags flycheck-pos-tip pos-tip flycheck-irony flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help elisp-slime-nav editorconfig dumb-jump doom-themes disaster define-word cython-mode counsel-projectile projectile counsel swiper ivy pkg-info epl company-tern dash-functional tern company-statistics company-rtags rtags company-irony irony company-c-headers company-anaconda company column-enforce-mode clean-aindent-mode clang-format centered-cursor-mode auto-yasnippet yasnippet auto-highlight-symbol auto-complete auto-compile packed anaconda-mode pythonic f dash s all-the-icons memoize aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async)))
- '(semantic-default-submodes
-   (quote
-    (semantic-idle-scheduler-mode semantic-idle-summary-mode))))
+    (auctex-latexmk yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-evil toc-org tagedit symon string-inflection stickyfunc-enhance srefactor spaceline-all-the-icons slim-mode shell-pop seeing-is-believing scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocop rspec-mode robe restart-emacs resize-window rbenv rake rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode prettier-js popwin pippel pipenv pip-requirements persp-mode password-generator paradox overseer org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain open-junk-file ob-ipython noflet nameless mvn multi-term move-text mmm-mode minitest meghanada maven-test-mode markdown-toc macrostep lorem-ipsum livid-mode live-py-mode link-hint json-navigator json-mode js2-refactor js-doc indent-guide importmagic impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-mode-manager helm-make helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag groovy-mode groovy-imports gradle-mode google-translate google-c-style golden-ratio gnuplot gh-md fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flycheck-irony flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help ensime emmet-mode elisp-slime-nav ein editorconfig dumb-jump dotenv-mode doom-themes doom-modeline disaster diminish define-word cython-mode counsel-projectile company-web company-tern company-statistics company-rtags company-irony company-emacs-eclim company-c-headers company-auctex company-anaconda command-log-mode column-enforce-mode cmake-mode clean-aindent-mode clang-format chruby centered-cursor-mode bury-successful-compilation bundler bison-mode beacon bash-completion auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
