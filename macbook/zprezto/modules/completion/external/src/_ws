@@ -1,0 +1,9 @@
+#compdef workspace
+
+local expl
+local ret=1
+
+[[ CURRENT -eq 2 ]] && _wanted directories expl 'Workspace directory' \
+    _path_files -/ -W ${HOME}/Documents/Workspace/ && ret=0
+
+return ret
